@@ -1,0 +1,237 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+struct Node
+{
+    int data;
+    struct Node *next;
+};
+struct Node *head;
+
+int choice;
+int b = 1;
+int choose_operation()
+{
+
+    printf("\n");
+    printf("1. traversal\n");
+    printf("2. insertion_at_begining\n");
+    printf("3. insertion_at_loc\n");
+    printf("4. insertion_at_the_end\n");
+    printf("5. deletion_at_begining\n");
+    printf("6. deletion_at_loc\n");
+    printf("7. deletion_at_the_end\n");
+
+    scanf("%d", &choice);
+
+    return choice;
+}
+void create(struct Node *node)
+{
+    int value;
+    char choice;
+    printf("Enter the value");
+    scanf("%d", &value);
+    node->data = value;
+    printf("Do you want to add more element ? (y/n) :- ");
+    getchar();
+    scanf("%c", &choice);
+    if (choice == 'y')
+    {
+        node->next = (struct Node *)malloc(sizeof(struct Node));
+        create(node->next);
+    }
+    else
+    {
+        node->next = NULL;
+    }
+}
+void display(struct Node *node)
+{
+    while (node != NULL)
+    {
+        printf("%d", node->data);
+        node = node->next;
+    }
+    printf("\n");
+}
+void insertion_at_begining()
+{
+    int value;
+    printf("enter the value");
+    scanf("%d", &value);
+    struct Node *temp = (struct Node *)malloc(sizeof(struct Node));
+    temp->data = value;
+    temp->next = head;
+    head = temp;
+}
+void insertion_at_loc(int loc)
+{
+    int value;
+    printf("enter the value ->");
+    scanf("%d", &value);
+    struct Node *temp;
+    temp = head;
+    while (temp->data != loc)
+    {
+        temp = temp->next;
+    }
+    struct Node *node = (struct Node *)malloc(sizeof(struct Node));
+    node->data = value;
+    node->next = temp->next;
+    temp->next = node;
+}
+void insertion_at_the_end()
+{
+    int value;
+    printf("enter the value ->");
+    scanf("%d", &value);
+    struct Node *temp;
+    temp = head;
+    while (temp->next != NULL)
+    {
+        temp = temp->next;
+    }
+    struct Node *node = (struct Node *)malloc(sizeof(struct Node));
+    node->data = value;
+    node->next = NULL;
+    temp->next = node;
+}
+void deletion_at_begining()
+{
+    if (head == NULL)
+    {
+        printf("List is empty\n");
+        return;
+    }
+    struct Node *temp;
+    temp = head;
+    head = head->next;
+    free(temp);
+}
+void deletion_at_loc(int loc)
+{
+    if (head == NULL)
+    {
+        printf("List is empty\n");
+        return;
+    }
+    struct Node *temp0;
+    struct Node *temp;
+    temp = head;
+    temp0 = head;
+    while (temp->data != loc)
+    {
+        temp0 = temp;
+        temp = temp->next;
+    }
+    temp0->next = temp->next;
+    free(temp);
+}
+void deletion_at_the_end()
+{
+    if (head == NULL)
+    {
+        printf("List is empty\n");
+        return;
+    }
+    struct Node *temp0;
+    struct Node *temp;
+    temp = head;
+    temp0 = head;
+    while (temp->next != NULL)
+    {
+        temp0 = temp;
+        temp = temp->next;
+    }
+    temp0->next = NULL;
+    free(temp);
+}
+void main()
+{
+    head = (struct Node *)malloc(sizeof(struct Node));
+    create(head);
+    display(head);
+    choose_operation();
+    while (b == 1)
+    {
+        if (choice == 1)
+        {
+            display(head);
+            choose_operation();
+        }
+        else if (choice == 2)
+        {
+            insertion_at_begining();
+            printf("Here is the updated list -->");
+            display(head);
+            choose_operation();
+        }
+        else if (choice == 3)
+        {
+            int loc;
+            printf("Enter the element after which you want to insert a new element");
+            scanf("%d", &loc);
+            insertion_at_loc(loc);
+            printf("Here is the updated list -->");
+            display(head);
+            choose_operation();
+        }
+        else if (choice == 4)
+        {
+            insertion_at_the_end();
+            printf("Here is the updated list -->");
+            display(head);
+            choose_operation();
+        }
+        else if (choice == 5)
+        {
+            deletion_at_begining();
+            if (head == NULL)
+            {
+                printf("List is empty\n");
+            }
+            else
+            {
+                printf("Here is the updated list -->");
+                display(head);
+            }
+            choose_operation();
+        }
+        else if (choice == 6)
+        {
+            int loc;
+            printf("Enter the element you want to delete");
+            scanf("%d", &loc);
+            deletion_at_loc(loc);
+            if (head == NULL)
+            {
+                printf("List is empty\n");
+            }
+            else
+            {
+                printf("Here is the updated list -->");
+                display(head);
+            }
+            choose_operation();
+        }
+        else if (choice == 7)
+        {
+            deletion_at_the_end();
+            if (head == NULL)
+            {
+                printf("List is empty\n");
+            }
+            else
+            {
+                printf("Here is the updated list -->");
+                display(head);
+            }
+            choose_operation();
+        }
+        else
+        {
+            printf("You entered the wrong choice");
+        }
+    }
+}
