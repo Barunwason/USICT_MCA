@@ -21,7 +21,8 @@ int choose_operation()
     printf("5. deletion_at_begining\n");
     printf("6. deletion_at_loc\n");
     printf("7. deletion_at_the_end\n");
-
+    printf("8. count the number of nodes\n");
+    printf("9. reverse the linked list\n");
     scanf("%d", &choice);
 
     return choice;
@@ -135,6 +136,12 @@ void deletion_at_the_end()
         printf("List is empty\n");
         return;
     }
+    if (head->next == NULL)
+    {
+        free(head);
+        head = NULL;
+        return;
+    }
     struct Node *temp0;
     struct Node *temp;
     temp = head;
@@ -146,6 +153,34 @@ void deletion_at_the_end()
     }
     temp0->next = NULL;
     free(temp);
+}
+void count_the_nodes()
+{
+    int count = 0;
+    struct Node *temp;
+    temp = head;
+    while (temp != NULL)
+    {
+        count++;
+        temp = temp->next;
+    }
+    printf("Total number of nodes are --> %d", count);
+}
+void reverse()
+{
+    struct Node *prev = NULL;
+    struct Node *current = head;
+    struct Node *next = NULL;
+
+    while (current != NULL)
+    {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+
+    head = prev;
 }
 void main()
 {
@@ -186,47 +221,93 @@ void main()
         }
         else if (choice == 5)
         {
-            deletion_at_begining();
+
             if (head == NULL)
             {
                 printf("List is empty\n");
             }
             else
             {
-                printf("Here is the updated list -->");
-                display(head);
+                deletion_at_begining();
+                if (head == NULL)
+                {
+                    printf("List is empty\n");
+                }
+                else
+                {
+                    printf("Here is the updated list -->");
+                    display(head);
+                }
             }
             choose_operation();
         }
         else if (choice == 6)
         {
             int loc;
-            printf("Enter the element you want to delete");
-            scanf("%d", &loc);
-            deletion_at_loc(loc);
+
             if (head == NULL)
             {
                 printf("List is empty\n");
             }
             else
             {
-                printf("Here is the updated list -->");
-                display(head);
+                printf("Enter the element you want to delete");
+                scanf("%d", &loc);
+                deletion_at_loc(loc);
+                if (head == NULL)
+                {
+                    printf("List is empty\n");
+                }
+                else
+                {
+                    printf("Here is the updated list -->");
+                    display(head);
+                }
             }
             choose_operation();
         }
         else if (choice == 7)
         {
-            deletion_at_the_end();
+
             if (head == NULL)
             {
                 printf("List is empty\n");
             }
             else
             {
-                printf("Here is the updated list -->");
+                deletion_at_the_end();
+                if (head == NULL)
+                {
+                    printf("List is empty\n");
+                }
+                else
+                    printf("Here is the updated list -->");
                 display(head);
             }
+            choose_operation();
+        }
+        else if (choice == 8)
+        {
+            if (head == NULL)
+            {
+                printf("List is empty\n");
+            }
+            else
+                count_the_nodes();
+            choose_operation();
+        }
+        else if (choice == 9)
+        {
+            if (head == NULL)
+            {
+                printf("List is empty\n");
+            }
+            else
+            {
+                reverse();
+                display(head);
+            }
+
             choose_operation();
         }
         else
