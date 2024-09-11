@@ -37,7 +37,7 @@ void create(struct Node *node)
     printf("Do you want to add more element ? (y/n) :- ");
     getchar();
     scanf("%c", &choice);
-    if (choice == 'y')
+    if (choice == 'y' || choice == 'Y')
     {
         node->next = (struct Node *)malloc(sizeof(struct Node));
         create(node->next);
@@ -68,6 +68,7 @@ void insertion_at_begining()
 }
 void insertion_at_loc(int loc)
 {
+    
     int value;
     printf("enter the value ->");
     scanf("%d", &value);
@@ -84,6 +85,10 @@ void insertion_at_loc(int loc)
 }
 void insertion_at_the_end()
 {
+    if(head==NULL){
+        insertion_at_begining();
+        return;
+    }
     int value;
     printf("enter the value ->");
     scanf("%d", &value);
@@ -207,9 +212,17 @@ void main()
             int loc;
             printf("Enter the element after which you want to insert a new element");
             scanf("%d", &loc);
-            insertion_at_loc(loc);
-            printf("Here is the updated list -->");
-            display(head);
+            if (head == NULL)
+            {
+                printf("List is empty\n");
+            }
+            else
+            {
+                insertion_at_loc(loc);
+                printf("Here is the updated list -->");
+                display(head);
+            }
+
             choose_operation();
         }
         else if (choice == 4)
