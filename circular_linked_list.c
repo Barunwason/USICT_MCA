@@ -155,12 +155,20 @@ void deletion_at_loc(int loc)
         printf("List is empty\n");
         return;
     }
-    else if (head->next == head)
+    else if (head->data == loc)
     {
-        struct Node *temp;
-        temp = head;
-        free(temp);
-        head = NULL;
+        if (head->next == head)
+        {
+            struct Node *temp;
+            temp = head;
+            free(temp);
+            head = NULL;
+        }
+        else
+        {
+            deletion_at_begining();
+        }
+        return;
     }
     struct Node *temp;
     struct Node *temp1;

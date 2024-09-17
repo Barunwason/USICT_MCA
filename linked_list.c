@@ -123,6 +123,19 @@ void deletion_at_loc(int loc)
         printf("List is empty\n");
         return;
     }
+    else if (head->data == loc)
+    {
+        if (head->next == NULL)
+        {
+            free(head);
+            head = NULL;
+        }
+        else
+        {
+            deletion_at_begining();
+        }
+        return;
+    }
     struct Node *temp0;
     struct Node *temp;
     temp = head;
@@ -213,9 +226,9 @@ void main()
         if (choice == 1)
         {
             if (head == NULL)
-                {
-                    printf("List is empty\n");
-                }
+            {
+                printf("List is empty\n");
+            }
             else
                 display(head);
             choose_operation();
