@@ -87,7 +87,6 @@ void insertion_at_begining()
     struct Node *ptr = (struct Node *)malloc(sizeof(struct Node));
     while (temp->next != head)
     {
-        printf("%d", temp->data);
         temp = temp->next;
     }
     ptr->data = value;
@@ -127,7 +126,6 @@ void insertion_at_the_end()
     struct Node *ptr = (struct Node *)malloc(sizeof(struct Node));
     while (temp->next != head)
     {
-        printf("%d", temp->data);
         temp = temp->next;
     }
     ptr->data = value;
@@ -204,20 +202,20 @@ void deletion_at_loc(int loc)
         }
     }
 }
-
 void reverse()
 {
     struct Node *temp = head;
     struct Node *temp1 = NULL;
-    
-    do {
-        temp1 = temp->next;
-        temp->next = temp->prev;
-        temp->prev = temp1;
-        temp = temp1;  
+
+    do
+    {
+        temp1 = temp->prev;
+        temp->prev = temp->next;
+        temp->next = temp1;
+        temp = temp->prev;
     } while (temp != head);
 
-    head = temp->prev;
+    head = temp1->prev;
 }
 void count_the_nodes()
 {
@@ -300,7 +298,7 @@ int main()
             {
                 printf("Element is not in the list\n");
             }
-            display(head);
+
             choice_operation();
         }
         else if (choice == 4)
