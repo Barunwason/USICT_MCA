@@ -8,13 +8,15 @@ int choose_operation()
 {
     cout << endl;
     cout << "1. traversal" << endl;
-    cout << "2. insertion" << endl;
+    cout << "2. Insertion_at_begining" << endl;
+    cout << "3. insertion_at_location" << endl;
+    cout << "4. insertion_at_end" << endl;
     cout << "3. deletion" << endl;
     cout << "4. sorting" << endl;
     cout << "5. searching" << endl;
     cin >> choice;
     return choice;
-}
+}  
 
 bool isarraysorted(int arr[], int size)
 {
@@ -46,7 +48,7 @@ void traversal(int arr[], int size)
     cout << endl;
 }
 
-int insertion(int arr[], int size, int length)
+int insertion_at_loc(int arr[], int size, int length)
 {
     int index, element;
     if (size < length)
@@ -179,7 +181,7 @@ int main()
         else if (choice == 2)
         {
             // Insertion
-            size = insertion(arr, size, length);
+            size = insertion_at_loc(arr, size, length);
             choose_operation();
         }
         else if (choice == 3)

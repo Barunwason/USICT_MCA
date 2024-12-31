@@ -31,7 +31,7 @@ void create(struct Node *node)
 {
     int value;
     char choice;
-    printf("Enter the value");
+    printf("Enter the value ");
     scanf("%d", &value);
     node->data = value;
     printf("Do you want to add more element ? (y/n) :- ");
@@ -51,7 +51,7 @@ void display(struct Node *node)
 {
     while (node != NULL)
     {
-        printf("%d", node->data);
+        printf("%d ", node->data);
         node = node->next;
     }
     printf("\n");
@@ -215,7 +215,7 @@ bool is_element_in_list(int value)
     }
     return false;
 }
-void main()
+int main()
 {
     head = (struct Node *)malloc(sizeof(struct Node));
     create(head);

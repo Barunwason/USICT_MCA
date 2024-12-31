@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-int traversal(int **arr, int rows, int cols)
+int zeros = 0;
+int size = 0;
+void traversal(int **arr, int rows, int cols)
 {
     for (int i = 0; i < rows; i++)
     {
@@ -14,8 +16,8 @@ int traversal(int **arr, int rows, int cols)
     }
 }
 bool is_matrix_sparse(int **arr, int rows, int cols)
-{
-    int zeros = 0;
+{   zeros = 0;
+    
     if (rows == 1 && cols == 1)
     {
         if (arr[rows - 1][cols - 1] == 0)
@@ -37,27 +39,27 @@ bool is_matrix_sparse(int **arr, int rows, int cols)
             }
         }
     }
-    if (zeros <= (rows * cols) / 2)
+    if (zeros > (rows * cols)*(3.0 / 4.0))
     {
-        return false;
+        return true;
     }
     else
     {
-        return true;
+        return false;
     }
 }
 void sparse_reprsentation(int **arr, int rows, int cols)
 {
-    int size = 0;
+    
     for (int i = 0; i < rows; i++)
         for (int j = 0; j < cols; j++)
             if (arr[i][j] != 0)
                 size++;
 
-    int **new_matrix = (int **)malloc(3 * sizeof(int *));
-    for (int i = 0; i < 3; i++)
+    int **new_matrix = (int **)malloc(size * sizeof(int *));
+    for (int i = 0; i < size; i++)
     {
-        new_matrix[i] = (int *)malloc(size * sizeof(int));
+        new_matrix[i] = (int *)malloc(3* sizeof(int));
     }
 
     int k = 0;
@@ -65,13 +67,13 @@ void sparse_reprsentation(int **arr, int rows, int cols)
         for (int j = 0; j < cols; j++)
             if (arr[i][j] != 0)
             {
-                new_matrix[0][k] = i;
-                new_matrix[1][k] = j;
-                new_matrix[2][k] = arr[i][j];
+                new_matrix[k][0] = i;
+                new_matrix[k][1] = j;
+                new_matrix[k][2] = arr[i][j];
                 k++;
             }
 
-    traversal(new_matrix, 3, size);
+    traversal(new_matrix, size, 3);
 }
 
 int main()
@@ -109,8 +111,12 @@ int main()
     if (is_matrix_sparse(arr, rows, cols))
     {
         printf("It is a sparse matrix\n");
-        printf("\tAnd this is its sparse representation\n");
+        
+        printf("\tAnd this is its sparse representation\n\n");
+        printf("\tRows\t\tCols\t\tValue\n");
         sparse_reprsentation(arr, rows, cols);
+        printf("Zero values --> %d\n",zeros);
+        printf("Non Zero values --> %d",size);
     }
     else
     {

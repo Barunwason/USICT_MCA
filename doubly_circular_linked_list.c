@@ -1,4 +1,4 @@
-#include <stdio.h>
+ #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 int b = 0;
@@ -7,7 +7,7 @@ int choice_operation()
 {
     printf("\n");
     printf("1. traversal\n");
-    printf("2. insertion_at_begining\n");
+    printf("2. insertion_at_begining\n"); 
     printf("3. insertion_at_loc\n");
     printf("4. insertion_at_the_end\n");
     printf("5. deletion_at_begining\n");
@@ -54,7 +54,7 @@ void display(struct Node *node)
 {
     while (node->next != head)
     {
-        printf("%d", node->data);
+        printf("%d ", node->data);
         node = node->next;
     }
     printf("%d", node->data);

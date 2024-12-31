@@ -59,7 +59,7 @@ void display(struct Node *node)
 {
     while (node->next != head)
     {
-        printf("%d", node->data);
+        printf("%d ", node->data);
         node = node->next;
     }
     printf("%d", node->data);

@@ -54,7 +54,7 @@ void display()
     struct Node *temp = head;
     while (temp != NULL)
     {
-        printf("%d", temp->data);
+        printf("%d ", temp->data);
         temp = temp->next;
     }
     printf("\n");
@@ -72,7 +72,7 @@ void reverse_display()
         printf("%d", temp->data);
         temp = temp->prev;
     }
-    printf("%d", temp->data);
+    printf("%d ", temp->data);
     printf("\n");
 }
 void insertion_at_begining()
@@ -298,7 +298,7 @@ int main()
                 {
                     insertion_at_loc(loc);
                     printf("Here is the updated list -->");
-                    display(head);
+                    display();
                 }
             }
             else
@@ -368,7 +368,7 @@ int main()
                     else
                     {
                         printf("Here is the updated list -->");
-                        display(head);
+                        display();
                     }
                 }
                 else
